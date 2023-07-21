@@ -6,8 +6,6 @@
 // Execute `rustlings hint iterators2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 // Step 1.
 // Complete the `capitalize_first` function.
 // "hello" -> "Hello"
@@ -15,7 +13,11 @@ pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
         None => String::new(),
-        Some(first) => ???,
+        Some(first) => {
+            let mut foo = first.to_string().to_uppercase();
+            foo.push_str(&input[1..]);
+            foo
+        }
     }
 }
 
@@ -24,7 +26,11 @@ pub fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    vec![]
+    let mut cap_word = vec![];
+    for word in words.into_iter() {
+        cap_word.push(capitalize_first(word))
+    }
+    cap_word
 }
 
 // Step 3.
@@ -32,7 +38,11 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
-    String::new()
+    let mut cap_single_word = String::new();
+    for word in words.into_iter() {
+        cap_single_word.push_str(&capitalize_first(word))
+    }
+    cap_single_word
 }
 
 #[cfg(test)]
